@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Παράλληλη Δυνατότητα Υπενθυμιστών και Λογιστικών</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f7f7f7;
+  color: #222;
+}
+
+.site-main {
+  padding: 24px;
+}
+
+.block-content {
+  box-sizing: border-box;
+}
+
+body.width-narrow .block-content {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+body.width-normal .block-content {
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+body.width-wide .block-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+body.width-legal .block-content {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+/* --------------------------------------------------
+   Header
+-------------------------------------------------- */
+
+.site-header {
+  margin-bottom: 24px;
+}
+
+.site-header-simple {
+  background: #ffffff;
+  border: 1px solid #ddd;
+  padding: 24px;
+  margin-bottom: 12px;
+  box-sizing: border-box;
+}
+
+.site-header-bar {
+  background: #ffffff;
+  border: 1px solid #ddd;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  box-sizing: border-box;
+}
+
+.site-header-bar.compact {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.site-title a,
+.site-nav a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.site-nav {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.site-search input {
+  padding: 8px 10px;
+  box-sizing: border-box;
+}
+
+/* --------------------------------------------------
+   Header Hero
+-------------------------------------------------- */
+
+.site-header-hero {
+  position: relative;
+  width: min(100%, var(--header-width, 100%));
+  overflow: hidden;
+  border: var(--header-image-border-width, 0px) solid var(--header-image-border-color, transparent);
+  border-radius: var(--header-image-radius, 12px);
+  margin: 0 auto 12px auto;
+  box-sizing: border-box;
+}
+
+.site-header-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.site-header-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.18);
+  pointer-events: none;
+}
+
+.site-header-title-layer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  padding: 24px;
+  box-sizing: border-box;
+  transform: translateX(var(--header-title-offset-x, 0px));
+}
+
+.header-pos-top-left .site-header-title-layer {
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.header-pos-top-center .site-header-title-layer {
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.header-pos-top-right .site-header-title-layer {
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.header-pos-center-left .site-header-title-layer {
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.header-pos-center .site-header-title-layer {
+  justify-content: center;
+  align-items: center;
+}
+
+.header-pos-center-right .site-header-title-layer {
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.header-pos-bottom-left .site-header-title-layer {
+  justify-content: flex-start;
+  align-items: flex-end;
+  padding-bottom: var(--header-title-offset-bottom, 24px);
+}
+
+.header-pos-bottom-center .site-header-title-layer {
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: var(--header-title-offset-bottom, 24px);
+}
+
+.header-pos-bottom-right .site-header-title-layer {
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding-bottom: var(--header-title-offset-bottom, 24px);
+}
+
+.site-header-title-block {
+  max-width: 80%;
+  box-sizing: border-box;
+}
+
+.site-header-title-block.has-title-box {
+  background: var(--header-title-box-background, rgba(255,255,255,0.85));
+  border: var(--header-title-box-border-width, 1px) solid var(--header-title-box-border-color, #7a0000);
+  border-radius: var(--header-title-box-radius, 10px);
+  padding: var(--header-title-box-padding, 12px);
+  box-sizing: border-box;
+}
+
+.site-header-title {
+  font-size: 2rem;
+  font-weight: bold;
+  line-height: 1.2;
+}
+
+.site-header-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.site-header-subtitle {
+  margin-top: 8px;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+/* --------------------------------------------------
+   Page Banner
+-------------------------------------------------- */
+
+.page-banner {
+  width: min(100%, var(--page-banner-width, 100%));
+  margin: 0 auto 24px auto;
+  box-sizing: border-box;
+}
+
+.page-banner-image-wrap {
+  overflow: hidden;
+  border: var(--page-banner-border-width, 0px) solid var(--page-banner-border-color, transparent);
+  border-radius: var(--page-banner-radius, 12px);
+  box-sizing: border-box;
+}
+
+.page-banner-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* --------------------------------------------------
+   Footer
+-------------------------------------------------- */
+
+.site-footer {
+  margin: 24px;
+  background: var(--footer-background-color, #f8f8f8);
+  border: var(--footer-border-width, 0px) solid var(--footer-border-color, transparent);
+  border-radius: var(--footer-radius, 10px);
+  padding: var(--footer-padding, 24px);
+  text-align: var(--footer-text-align, center);
+  box-sizing: border-box;
+}
+
+.site-footer-image-wrap {
+  width: min(100%, var(--footer-width, 100%));
+  margin: 0 auto 18px auto;
+  box-sizing: border-box;
+}
+
+.site-footer-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.site-footer-content {
+  display: block;
+}
+
+.footer-layout-stack .site-footer-content {
+  display: block;
+}
+
+.footer-layout-inline .site-footer-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.footer-layout-columns-2 .site-footer-content {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.footer-layout-columns-3 .site-footer-content {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.site-footer-title {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.site-footer-subtitle {
+  margin-bottom: 8px;
+}
+
+.site-footer-links,
+.site-footer-contact,
+.site-footer-copyright,
+.site-footer-default-text {
+  margin-top: 8px;
+}
+
+.site-footer a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* --------------------------------------------------
+   Existing content styles
+-------------------------------------------------- */
+
+.home-header h1 {
+  margin-top: 0;
+}
+
+.home-hero-image-wrap {
+  width: min(100%, 100%);
+  margin: 0 auto 24px auto;
+  box-sizing: border-box;
+}
+
+.home-hero-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.home-section {
+  margin-bottom: 32px;
+}
+
+.simple-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.simple-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 16px;
+}
+
+.simple-card h3 {
+  margin-top: 0;
+}
+
+.simple-card a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.simple-card p {
+  white-space: pre-line;
+}
+
+.person-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.person-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  overflow: hidden;
+}
+
+.person-card a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.person-card-image-wrap {
+  width: min(100%, var(--person-card-image-width, 100%));
+  margin: 0 auto;
+}
+
+.card-image-wrapper {
+  position: relative;
+  height: 260px;
+  overflow: hidden;
+}
+
+.card-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-hover {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.72);
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  padding: 16px;
+}
+
+.card-image-wrapper:hover .card-hover {
+  opacity: 1;
+}
+
+.card-body {
+  padding: 14px;
+}
+
+.person-hero,
+.entity-header {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 24px;
+  background: #fff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  margin-bottom: 20px;
+}
+
+.person-photo-wrap {
+  width: min(100%, var(--person-photo-width, 100%));
+  margin: 0 auto;
+}
+
+.entity-image-wrap {
+  width: min(100%, var(--entity-image-width, 100%));
+  margin: 0 auto;
+}
+
+.content-image-wrap {
+  width: min(100%, var(--content-image-width, 100%));
+  margin: 0 auto 18px auto;
+}
+
+.person-photo img,
+.entity-image img,
+.content-image img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.person-summary p,
+.person-bio p,
+.entity-summary p,
+.person-short-summary,
+.entity-short-summary,
+.event-card p,
+.person-relations li div,
+.entity-relations li div,
+.content-summary p,
+.content-body div,
+.content-short-summary {
+  white-space: pre-line;
+}
+
+.person-tags span,
+.tag-list span {
+  display: inline-block;
+  background: #eee;
+  padding: 4px 8px;
+  margin: 0 6px 6px 0;
+}
+
+.content-page {
+  display: block;
+}
+
+.rich-content p {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.content-embedded-image,
+.content-embedded-pdf,
+.content-pdf-link {
+  margin: 18px 0;
+}
+
+.content-embedded-image img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.read-more-link {
+  display: inline-block;
+  margin-top: 8px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.content-header,
+.content-summary,
+.content-body,
+.content-tags,
+.content-sources {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+
+.block-content {
+  font-family: Georgia, serif;
+  font-size: 18px;
+  color: #1f1f1f;
+  background-color: #ffffff;
+  line-height: 1.7;
+  text-align: justify;
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 24px;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+.block-content p {
+  margin: 0 0 1.1em 0;
+}
+
+.block-content h1,
+.block-content h2,
+.block-content h3,
+.block-content h4,
+.block-content h5,
+.block-content h6 {
+  font-family: "Times New Roman", serif;
+  color: #7a0000;
+  margin-top: 1.8em;
+  margin-bottom: 0.6em;
+  line-height: 1.25;
+}
+
+.block-content h1 { font-size: 34px; }
+.block-content h2 { font-size: 28px; }
+.block-content h3 { font-size: 22px; }
+
+.block-content small {
+  font-size: 14px;
+  color: #666666;
+}
+
+.block-content a {
+  color: #003366;
+  text-decoration: none;
+}
+
+.block-content a:hover {
+  color: #8b0000;
+  text-decoration: underline;
+}
+
+.block-content .content-embedded-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  display: block;
+  margin: 0 auto;
+}
+
+.block-content .content-embedded-pdf {
+  background: #ffffff;
+  border: 1px solid #d6d6d6;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+  margin: 1.2em 0;
+}
+
+.block-content .content-embedded-pdf iframe {
+  display: block;
+  width: 100%;
+  border: 0;
+  background: #ffffff;
+}
+
+.block-content .content-pdf-link {
+  margin: 1em 0 1.2em 0;
+}
+
+.block-content blockquote {
+  margin: 1.2em 0;
+  padding: 0.8em 1em;
+  border-left: 4px solid #d6d6d6;
+  background: #f8f8f8;
+  border-radius: 10px;
+}
+
+.block-content hr {
+  border: 0;
+  border-top: 1px solid #d6d6d6;
+  margin: 1.5em 0;
+}
+
+  </style>
+  
+  <script src="../js/graph-data.js" defer></script>
+  
+  <script src="../js/app.js" defer></script>
+</head>
+<body class="theme-default layout-default nav-minimal page-default section-boxed width-normal">
+
+  
+  <header class="site-header site-header-mode-auto">
+
+    
+    <div class="site-header-hero header-pos-bottom-center"
+         style="
+           --header-width: 1000px;
+           --header-title-offset-bottom: 24px;
+           --header-title-offset-x: 0px;
+           --header-title-box-background: ffffffcc;
+           --header-title-box-border-color: 7a0000;
+           --header-title-box-border-width: 1px;
+           --header-title-box-padding: 12px;
+           --header-title-box-radius: 10px;
+           --header-image-border-color: d6d6d6;
+           --header-image-border-width: 1px;
+           --header-image-radius: 12px;
+         ">
+
+      <img class="site-header-image"
+           src="../images/4.png"
+           alt="Lawers System Control">
+
+      <div class="site-header-overlay"></div>
+
+      <div class="site-header-title-layer">
+        <div class="site-header-title-block has-title-box"
+             style="text-align: center;">
+
+          <div class="site-header-title">
+            <a href="../index.html">Lawers System Control</a>
+          </div>
+
+          
+
+        </div>
+      </div>
+    </div>
+    
+
+    <div class="site-header-simple">
+      <div class="site-title">
+        <a href="../index.html">Lawers System Control</a>
+      </div>
+
+      
+    </div>
+
+    <div class="site-header-bar ">
+      <nav class="site-nav">
+        <a href="../index.html">Αρχική</a>
+      </nav>
+
+      
+      
+      <div class="site-search">
+        <input type="text" placeholder="Αναζήτηση...">
+      </div>
+      
+      
+    </div>
+
+  </header>
+  
+
+  
+
+  <main class="site-main">
+    <div class="block-content theme-default">
+      <section class="content-page">
+
+  <section class="content-header">
+    <h1>Παράλληλη Δυνατότητα Υπενθυμιστών και Λογιστικών</h1>
+
+    
+
+    
+
+    
+    <p class="content-short-summary">Το LawersSystemControl υποστηρίζει παράλληλα υπενθυμιστές, λογιστικά και λειτουργικά εργαλεία, ώστε το γραφείο να εργάζεται σε ενιαίο πρακτικό περιβάλλον.</p>
+    
+  </section>
+
+  
+  <section class="content-summary">
+    <h2>Περίληψη</h2>
+    <p>Η νομική εργασία δεν εξελίσσεται αποκομμένα από χρονικές υποχρεώσεις, οικονομική παρακολούθηση και καθημερινές λειτουργικές ανάγκες.</p>
+  </section>
+  
+
+  <section class="content-body">
+    <h2>Κείμενο</h2>
+    <div class="rich-content"><p>Το LawersSystemControl υποστηρίζει <strong>παράλληλη δυνατότητα υπενθυμιστών, λογιστικών και άλλων λειτουργικών εργαλείων</strong>, ώστε το γραφείο να μη χρειάζεται να διασπά την εργασία του σε ξεχωριστές εφαρμογές και απομονωμένα συστήματα.</p><p>Η λογική του είναι ότι η υπόθεση δεν αποκόπτεται από το λειτουργικό της περιβάλλον, αλλά εντάσσεται σε ένα ευρύτερο οργανωμένο σύστημα στο οποίο τα κρίσιμα στοιχεία της καθημερινής εργασίας παραμένουν συνδεδεμένα μεταξύ τους.</p></div>
+  </section>
+
+  
+  <section class="content-tags">
+    <h2>Ετικέτες</h2>
+    <div class="tag-list">
+      
+      <span>υπενθυμιστές</span>
+      
+      <span>λογιστικά</span>
+      
+      <span>λειτουργικά εργαλεία</span>
+      
+      <span>οικονομική παρακολούθηση</span>
+      
+      <span>lawerssystemcontrol</span>
+      
+    </div>
+  </section>
+  
+
+  
+
+</section>
+
+    </div>
+  </main>
+
+  
+  <footer class="site-footer footer-style-solid footer-layout-stack"
+          style="
+            --footer-background-color: f8f8f8;
+            --footer-border-color: d6d6d6;
+            --footer-border-width: 1px;
+            --footer-radius: 10px;
+            --footer-padding: 24px;
+            --footer-text-align: center;
+          ">
+
+    
+
+    <div class="site-footer-content">
+
+      
+
+      
+
+      
+
+      
+
+      
+      <div class="site-footer-copyright">&copy; Lawers System Control</div>
+      
+
+      <div class="site-footer-default-text">Lawers System Control</div>
+
+    </div>
+  </footer>
+  
+
+</body>
+</html>

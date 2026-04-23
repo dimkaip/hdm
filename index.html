@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lawers System Control</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f7f7f7;
+  color: #222;
+}
+
+.site-main {
+  padding: 24px;
+}
+
+.block-content {
+  box-sizing: border-box;
+}
+
+body.width-narrow .block-content {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+body.width-normal .block-content {
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+body.width-wide .block-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+body.width-legal .block-content {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+/* --------------------------------------------------
+   Header
+-------------------------------------------------- */
+
+.site-header {
+  margin-bottom: 24px;
+}
+
+.site-header-simple {
+  background: #ffffff;
+  border: 1px solid #ddd;
+  padding: 24px;
+  margin-bottom: 12px;
+  box-sizing: border-box;
+}
+
+.site-header-bar {
+  background: #ffffff;
+  border: 1px solid #ddd;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  box-sizing: border-box;
+}
+
+.site-header-bar.compact {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.site-title a,
+.site-nav a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.site-nav {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.site-search input {
+  padding: 8px 10px;
+  box-sizing: border-box;
+}
+
+/* --------------------------------------------------
+   Header Hero
+-------------------------------------------------- */
+
+.site-header-hero {
+  position: relative;
+  width: min(100%, var(--header-width, 100%));
+  overflow: hidden;
+  border: var(--header-image-border-width, 0px) solid var(--header-image-border-color, transparent);
+  border-radius: var(--header-image-radius, 12px);
+  margin: 0 auto 12px auto;
+  box-sizing: border-box;
+}
+
+.site-header-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.site-header-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.18);
+  pointer-events: none;
+}
+
+.site-header-title-layer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  padding: 24px;
+  box-sizing: border-box;
+  transform: translateX(var(--header-title-offset-x, 0px));
+}
+
+.header-pos-top-left .site-header-title-layer {
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.header-pos-top-center .site-header-title-layer {
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.header-pos-top-right .site-header-title-layer {
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.header-pos-center-left .site-header-title-layer {
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.header-pos-center .site-header-title-layer {
+  justify-content: center;
+  align-items: center;
+}
+
+.header-pos-center-right .site-header-title-layer {
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.header-pos-bottom-left .site-header-title-layer {
+  justify-content: flex-start;
+  align-items: flex-end;
+  padding-bottom: var(--header-title-offset-bottom, 24px);
+}
+
+.header-pos-bottom-center .site-header-title-layer {
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: var(--header-title-offset-bottom, 24px);
+}
+
+.header-pos-bottom-right .site-header-title-layer {
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding-bottom: var(--header-title-offset-bottom, 24px);
+}
+
+.site-header-title-block {
+  max-width: 80%;
+  box-sizing: border-box;
+}
+
+.site-header-title-block.has-title-box {
+  background: var(--header-title-box-background, rgba(255,255,255,0.85));
+  border: var(--header-title-box-border-width, 1px) solid var(--header-title-box-border-color, #7a0000);
+  border-radius: var(--header-title-box-radius, 10px);
+  padding: var(--header-title-box-padding, 12px);
+  box-sizing: border-box;
+}
+
+.site-header-title {
+  font-size: 2rem;
+  font-weight: bold;
+  line-height: 1.2;
+}
+
+.site-header-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.site-header-subtitle {
+  margin-top: 8px;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+/* --------------------------------------------------
+   Page Banner
+-------------------------------------------------- */
+
+.page-banner {
+  width: min(100%, var(--page-banner-width, 100%));
+  margin: 0 auto 24px auto;
+  box-sizing: border-box;
+}
+
+.page-banner-image-wrap {
+  overflow: hidden;
+  border: var(--page-banner-border-width, 0px) solid var(--page-banner-border-color, transparent);
+  border-radius: var(--page-banner-radius, 12px);
+  box-sizing: border-box;
+}
+
+.page-banner-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* --------------------------------------------------
+   Footer
+-------------------------------------------------- */
+
+.site-footer {
+  margin: 24px;
+  background: var(--footer-background-color, #f8f8f8);
+  border: var(--footer-border-width, 0px) solid var(--footer-border-color, transparent);
+  border-radius: var(--footer-radius, 10px);
+  padding: var(--footer-padding, 24px);
+  text-align: var(--footer-text-align, center);
+  box-sizing: border-box;
+}
+
+.site-footer-image-wrap {
+  width: min(100%, var(--footer-width, 100%));
+  margin: 0 auto 18px auto;
+  box-sizing: border-box;
+}
+
+.site-footer-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.site-footer-content {
+  display: block;
+}
+
+.footer-layout-stack .site-footer-content {
+  display: block;
+}
+
+.footer-layout-inline .site-footer-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.footer-layout-columns-2 .site-footer-content {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.footer-layout-columns-3 .site-footer-content {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.site-footer-title {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.site-footer-subtitle {
+  margin-bottom: 8px;
+}
+
+.site-footer-links,
+.site-footer-contact,
+.site-footer-copyright,
+.site-footer-default-text {
+  margin-top: 8px;
+}
+
+.site-footer a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* --------------------------------------------------
+   Existing content styles
+-------------------------------------------------- */
+
+.home-header h1 {
+  margin-top: 0;
+}
+
+.home-hero-image-wrap {
+  width: min(100%, 100%);
+  margin: 0 auto 24px auto;
+  box-sizing: border-box;
+}
+
+.home-hero-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.home-section {
+  margin-bottom: 32px;
+}
+
+.simple-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.simple-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 16px;
+}
+
+.simple-card h3 {
+  margin-top: 0;
+}
+
+.simple-card a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.simple-card p {
+  white-space: pre-line;
+}
+
+.person-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.person-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  overflow: hidden;
+}
+
+.person-card a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.person-card-image-wrap {
+  width: min(100%, var(--person-card-image-width, 100%));
+  margin: 0 auto;
+}
+
+.card-image-wrapper {
+  position: relative;
+  height: 260px;
+  overflow: hidden;
+}
+
+.card-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-hover {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.72);
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  padding: 16px;
+}
+
+.card-image-wrapper:hover .card-hover {
+  opacity: 1;
+}
+
+.card-body {
+  padding: 14px;
+}
+
+.person-hero,
+.entity-header {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 24px;
+  background: #fff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  margin-bottom: 20px;
+}
+
+.person-photo-wrap {
+  width: min(100%, var(--person-photo-width, 100%));
+  margin: 0 auto;
+}
+
+.entity-image-wrap {
+  width: min(100%, var(--entity-image-width, 100%));
+  margin: 0 auto;
+}
+
+.content-image-wrap {
+  width: min(100%, var(--content-image-width, 100%));
+  margin: 0 auto 18px auto;
+}
+
+.person-photo img,
+.entity-image img,
+.content-image img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.person-summary p,
+.person-bio p,
+.entity-summary p,
+.person-short-summary,
+.entity-short-summary,
+.event-card p,
+.person-relations li div,
+.entity-relations li div,
+.content-summary p,
+.content-body div,
+.content-short-summary {
+  white-space: pre-line;
+}
+
+.person-tags span,
+.tag-list span {
+  display: inline-block;
+  background: #eee;
+  padding: 4px 8px;
+  margin: 0 6px 6px 0;
+}
+
+.content-page {
+  display: block;
+}
+
+.rich-content p {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.content-embedded-image,
+.content-embedded-pdf,
+.content-pdf-link {
+  margin: 18px 0;
+}
+
+.content-embedded-image img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.read-more-link {
+  display: inline-block;
+  margin-top: 8px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.content-header,
+.content-summary,
+.content-body,
+.content-tags,
+.content-sources {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+
+.block-content {
+  font-family: Georgia, serif;
+  font-size: 18px;
+  color: #1f1f1f;
+  background-color: #ffffff;
+  line-height: 1.7;
+  text-align: justify;
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 24px;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+.block-content p {
+  margin: 0 0 1.1em 0;
+}
+
+.block-content h1,
+.block-content h2,
+.block-content h3,
+.block-content h4,
+.block-content h5,
+.block-content h6 {
+  font-family: "Times New Roman", serif;
+  color: #7a0000;
+  margin-top: 1.8em;
+  margin-bottom: 0.6em;
+  line-height: 1.25;
+}
+
+.block-content h1 { font-size: 34px; }
+.block-content h2 { font-size: 28px; }
+.block-content h3 { font-size: 22px; }
+
+.block-content small {
+  font-size: 14px;
+  color: #666666;
+}
+
+.block-content a {
+  color: #003366;
+  text-decoration: none;
+}
+
+.block-content a:hover {
+  color: #8b0000;
+  text-decoration: underline;
+}
+
+.block-content .content-embedded-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  display: block;
+  margin: 0 auto;
+}
+
+.block-content .content-embedded-pdf {
+  background: #ffffff;
+  border: 1px solid #d6d6d6;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+  margin: 1.2em 0;
+}
+
+.block-content .content-embedded-pdf iframe {
+  display: block;
+  width: 100%;
+  border: 0;
+  background: #ffffff;
+}
+
+.block-content .content-pdf-link {
+  margin: 1em 0 1.2em 0;
+}
+
+.block-content blockquote {
+  margin: 1.2em 0;
+  padding: 0.8em 1em;
+  border-left: 4px solid #d6d6d6;
+  background: #f8f8f8;
+  border-radius: 10px;
+}
+
+.block-content hr {
+  border: 0;
+  border-top: 1px solid #d6d6d6;
+  margin: 1.5em 0;
+}
+
+  </style>
+  
+  <script src="js/graph-data.js" defer></script>
+  
+  <script src="js/app.js" defer></script>
+</head>
+<body class="theme-default layout-default nav-minimal page-default section-boxed width-normal">
+
+  
+  <header class="site-header site-header-mode-auto">
+
+    
+    <div class="site-header-hero header-pos-bottom-center"
+         style="
+           --header-width: 1000px;
+           --header-title-offset-bottom: 24px;
+           --header-title-offset-x: 0px;
+           --header-title-box-background: ffffffcc;
+           --header-title-box-border-color: 7a0000;
+           --header-title-box-border-width: 1px;
+           --header-title-box-padding: 12px;
+           --header-title-box-radius: 10px;
+           --header-image-border-color: d6d6d6;
+           --header-image-border-width: 1px;
+           --header-image-radius: 12px;
+         ">
+
+      <img class="site-header-image"
+           src="images/4.png"
+           alt="Lawers System Control">
+
+      <div class="site-header-overlay"></div>
+
+      <div class="site-header-title-layer">
+        <div class="site-header-title-block has-title-box"
+             style="text-align: center;">
+
+          <div class="site-header-title">
+            <a href="index.html">Lawers System Control</a>
+          </div>
+
+          
+
+        </div>
+      </div>
+    </div>
+    
+
+    <div class="site-header-simple">
+      <div class="site-title">
+        <a href="index.html">Lawers System Control</a>
+      </div>
+
+      
+    </div>
+
+    <div class="site-header-bar ">
+      <nav class="site-nav">
+        <a href="index.html">Αρχική</a>
+      </nav>
+
+      
+      
+      <div class="site-search">
+        <input type="text" placeholder="Αναζήτηση...">
+      </div>
+      
+      
+    </div>
+
+  </header>
+  
+
+  
+
+  <main class="site-main">
+    <div class="block-content theme-default">
+      <section class="home-page">
+  <div class="home-header">
+    <h1>Lawers System Control</h1>
+  </div>
+
+  
+  <div class="home-hero-image-wrap">
+    <img class="home-hero-image" src="images/4.png" alt="Lawers System Control">
+  </div>
+  
+
+  
+  <section class="home-section">
+    <h2>Σελίδες</h2>
+    <div class="simple-card-grid">
+      
+      <article class="simple-card">
+        <h3><a href="content/index.html" target="_blank" rel="noopener noreferrer">Νέο Σύστημα Σκέψης στην Αντιμετώπιση του Προβλήματος της Πολυπλοκότητας</a></h3>
+        <p>Το LawersSystemControl δεν είναι μόνο εργαλείο οργάνωσης, αλλά εισάγει νέο σύστημα σκέψης για την αντιμετώπιση της πολυπλοκότητας, μετατρέποντας τη διάσπαρτη νομική ύλη σε δομημένο, εποπτεύσιμο και άμεσα αξιοποιήσιμο περιβάλλον εργασίας.</p>
+        <p><a class="read-more-link" href="content/index.html" target="_blank" rel="noopener noreferrer">Διαβάστε περισσότερα</a></p>
+      </article>
+      
+      <article class="simple-card">
+        <h3><a href="content/lawers-system-control.html" target="_blank" rel="noopener noreferrer">LawersSystemControl</a></h3>
+        <p>Ολοκληρωμένο σύστημα διαχείρισης νομικής εργασίας για υποθέσεις, έγγραφα, προθεσμίες, αναθέσεις και οργανωμένη υποστήριξη δικηγορικών και συνεργατικών σχημάτων.</p>
+        <p><a class="read-more-link" href="content/lawers-system-control.html" target="_blank" rel="noopener noreferrer">Διαβάστε περισσότερα</a></p>
+      </article>
+      
+      <article class="simple-card">
+        <h3><a href="content/automati-dimiourgia-ntosie-ypothesis.html" target="_blank" rel="noopener noreferrer">Αυτόματη Δημιουργία Ολόκληρου του Ντοσιέ Μιας Υπόθεσης</a></h3>
+        <p>Το LawersSystemControl δημιουργεί αυτόματα ολόκληρο το ντοσιέ μιας υπόθεσης, συγκροτώντας από την πρώτη στιγμή το πλήρες ψηφιακό περιβάλλον εργασίας της.</p>
+        <p><a class="read-more-link" href="content/automati-dimiourgia-ntosie-ypothesis.html" target="_blank" rel="noopener noreferrer">Διαβάστε περισσότερα</a></p>
+      </article>
+      
+      <article class="simple-card">
+        <h3><a href="content/idiotiki-egkatastasi-asfali-perivallonta.html" target="_blank" rel="noopener noreferrer">Ιδιωτική Εγκατάσταση σε Ασφαλή Περιβάλλοντα</a></h3>
+        <p>Το LawersSystemControl παραδίδεται για λειτουργία σε ιδιωτικές μηχανές και σε ασφαλή περιβάλλοντα, εξασφαλίζοντας πλήρη έλεγχο, αυτονομία και υψηλό επίπεδο εμπιστευτικότητας.</p>
+        <p><a class="read-more-link" href="content/idiotiki-egkatastasi-asfali-perivallonta.html" target="_blank" rel="noopener noreferrer">Διαβάστε περισσότερα</a></p>
+      </article>
+      
+      <article class="simple-card">
+        <h3><a href="content/xoris-antistoixo-stin-agora.html" target="_blank" rel="noopener noreferrer">Χωρίς Αντίστοιχο στην Αγορά</a></h3>
+        <p>Το LawersSystemControl δεν αποτελεί απλή παραλλαγή ενός συνηθισμένου νομικού προγράμματος, αλλά ένα ιδιαίτερο και ολοκληρωμένο σύστημα χωρίς πραγματικό αντίστοιχο στην αγορά.</p>
+        <p><a class="read-more-link" href="content/xoris-antistoixo-stin-agora.html" target="_blank" rel="noopener noreferrer">Διαβάστε περισσότερα</a></p>
+      </article>
+      
+      <article class="simple-card">
+        <h3><a href="content/automati-paragogi-dikografon.html" target="_blank" rel="noopener noreferrer">Δυνατότητα Αυτόματης Παραγωγής Δικογράφων</a></h3>
+        <p>Το LawersSystemControl υποστηρίζει δυνατότητα αυτόματης παραγωγής δικογράφων, επιτρέποντας στο γραφείο να μετατρέπει την ήδη οργανωμένη πληροφορία της υπόθεσης σε άμεσα αξιοποιήσιμο νομικό κείμενο.</p>
+        <p><a class="read-more-link" href="content/automati-paragogi-dikografon.html" target="_blank" rel="noopener noreferrer">Διαβάστε περισσότερα</a></p>
+      </article>
+      
+      <article class="simple-card">
+        <h3><a href="content/xrisi-optikon-perivallonton-gia-amesi-epopteia-kai-katagrafi.html" target="_blank" rel="noopener noreferrer">Χρήση Οπτικών Περιβαλλόντων για Άμεση Εποπτεία και Καταγραφή</a></h3>
+        <p>Το LawersSystemControl αξιοποιεί οπτικά περιβάλλοντα εργασίας για να προσφέρει άμεση εποπτεία, καθαρή αντίληψη της δομής του φακέλου και ταυτόχρονη οργανωμένη καταγραφή της νομικής εργασίας.</p>
+        <p><a class="read-more-link" href="content/xrisi-optikon-perivallonton-gia-amesi-epopteia-kai-katagrafi.html" target="_blank" rel="noopener noreferrer">Διαβάστε περισσότερα</a></p>
+      </article>
+      
+      <article class="simple-card">
+        <h3><a href="content/paralleli-dynatotita-ypenthymiston-logistikon-kai-leitourgikon-ergaleion.html" target="_blank" rel="noopener noreferrer">Παράλληλη Δυνατότητα Υπενθυμιστών, Λογιστικών και Λειτουργικών Εργαλείων</a></h3>
+        <p>Το LawersSystemControl δεν περιορίζεται στον φάκελο της υπόθεσης, αλλά υποστηρίζει παράλληλα υπενθυμιστές, λογιστικά και άλλα λειτουργικά εργαλεία, ώστε το γραφείο να εργάζεται μέσα σε ένα ενιαίο πρακτικό περιβάλλον.</p>
+        <p><a class="read-more-link" href="content/paralleli-dynatotita-ypenthymiston-logistikon-kai-leitourgikon-ergaleion.html" target="_blank" rel="noopener noreferrer">Διαβάστε περισσότερα</a></p>
+      </article>
+      
+      <article class="simple-card">
+        <h3><a href="content/dikigoriko-grafeio-xoris-xartia.html" target="_blank" rel="noopener noreferrer">Δικηγορικό Γραφείο Χωρίς Χαρτιά</a></h3>
+        <p>Το LawersSystemControl μετατρέπει το γραφείο σε πραγματικά paperless περιβάλλον, όπου η υπόθεση παύει να εξαρτάται από φυσικά ντοσιέ και διάσπαρτα έγγραφα.</p>
+        <p><a class="read-more-link" href="content/dikigoriko-grafeio-xoris-xartia.html" target="_blank" rel="noopener noreferrer">Διαβάστε περισσότερα</a></p>
+      </article>
+      
+      <article class="simple-card">
+        <h3><a href="content/pliris-katagrafi-ton-panton.html" target="_blank" rel="noopener noreferrer">Πλήρης Καταγραφή των Πάντων</a></h3>
+        <p>Το LawersSystemControl λειτουργεί ως σύστημα πλήρους καταγραφής, ώστε τίποτε κρίσιμο να μη μένει εκτός του οργανωμένου περιβάλλοντος εργασίας.</p>
+        <p><a class="read-more-link" href="content/pliris-katagrafi-ton-panton.html" target="_blank" rel="noopener noreferrer">Διαβάστε περισσότερα</a></p>
+      </article>
+      
+      <article class="simple-card">
+        <h3><a href="content/meiosi-kathimerinou-kopou-eos-90.html" target="_blank" rel="noopener noreferrer">Μείωση του Καθημερινού Κόπου έως και 90%</a></h3>
+        <p>Το LawersSystemControl έχει σχεδιαστεί ώστε να μειώνει έως και κατά 90% τον πρακτικό κόπο της διαχείρισης υποθέσεων, εγγράφων και φακέλων.</p>
+        <p><a class="read-more-link" href="content/meiosi-kathimerinou-kopou-eos-90.html" target="_blank" rel="noopener noreferrer">Διαβάστε περισσότερα</a></p>
+      </article>
+      
+      <article class="simple-card">
+        <h3><a href="content/safis-diaxorismos-pliroforias.html" target="_blank" rel="noopener noreferrer">Σαφής Διαχωρισμός της Πληροφορίας</a></h3>
+        <p>Το LawersSystemControl οργανώνει την πληροφορία με σαφή διαχωρισμό, ώστε η υπόθεση να μη μετατρέπεται σε χαοτική συσσώρευση αρχείων και δεδομένων.</p>
+        <p><a class="read-more-link" href="content/safis-diaxorismos-pliroforias.html" target="_blank" rel="noopener noreferrer">Διαβάστε περισσότερα</a></p>
+      </article>
+      
+      <article class="simple-card">
+        <h3><a href="content/ypsili-alla-paneukoli-epopteia.html" target="_blank" rel="noopener noreferrer">Υψηλή αλλά Πανεύκολη Εποπτεία</a></h3>
+        <p>Το LawersSystemControl προσφέρει υψηλή εποπτεία κάθε σημείου της υπόθεσης με τρόπο άμεσο, γρήγορο και λειτουργικά εύκολο.</p>
+        <p><a class="read-more-link" href="content/ypsili-alla-paneukoli-epopteia.html" target="_blank" rel="noopener noreferrer">Διαβάστε περισσότερα</a></p>
+      </article>
+      
+      <article class="simple-card">
+        <h3><a href="content/diatirisi-oikonomikon-stoixeion-sto-idio-systima.html" target="_blank" rel="noopener noreferrer">Διατήρηση των Οικονομικών Στοιχείων στο Ίδιο Σύστημα</a></h3>
+        <p>Το LawersSystemControl διατηρεί παράλληλα όλα τα οικονομικά στοιχεία μέσα στο ίδιο ενιαίο περιβάλλον της νομικής εργασίας.</p>
+        <p><a class="read-more-link" href="content/diatirisi-oikonomikon-stoixeion-sto-idio-systima.html" target="_blank" rel="noopener noreferrer">Διαβάστε περισσότερα</a></p>
+      </article>
+      
+      <article class="simple-card">
+        <h3><a href="content/ensomatosi-scanners-sti-roi-ergasias.html" target="_blank" rel="noopener noreferrer">Ενσωμάτωση Scanners στη Ροή Εργασίας</a></h3>
+        <p>Το LawersSystemControl επικοινωνεί με scanners και ενσωματώνει τη σάρωση μέσα στην καθημερινή ροή εργασίας του γραφείου.</p>
+        <p><a class="read-more-link" href="content/ensomatosi-scanners-sti-roi-ergasias.html" target="_blank" rel="noopener noreferrer">Διαβάστε περισσότερα</a></p>
+      </article>
+      
+      <article class="simple-card">
+        <h3><a href="content/mi-katastrofiki-diaxeirisi-arxeion.html" target="_blank" rel="noopener noreferrer">Μη Καταστροφική Διαχείριση Αρχείων</a></h3>
+        <p>Το LawersSystemControl λειτουργεί με μη καταστροφική λογική σε αρχεία, ώστε το πρωτογενές υλικό να παραμένει ασφαλές και αναλλοίωτο.</p>
+        <p><a class="read-more-link" href="content/mi-katastrofiki-diaxeirisi-arxeion.html" target="_blank" rel="noopener noreferrer">Διαβάστε περισσότερα</a></p>
+      </article>
+      
+      <article class="simple-card">
+        <h3><a href="content/apomakrysmeni-synergasia-sto-idio-ergo.html" target="_blank" rel="noopener noreferrer">Απομακρυσμένη Συνεργασία Επάνω στο Ίδιο Έργο</a></h3>
+        <p>Το LawersSystemControl υποστηρίζει απομακρυσμένη λειτουργία γραφείων και συνεργασία επάνω στο ίδιο έργο, χωρίς να χάνεται η συνοχή του φακέλου.</p>
+        <p><a class="read-more-link" href="content/apomakrysmeni-synergasia-sto-idio-ergo.html" target="_blank" rel="noopener noreferrer">Διαβάστε περισσότερα</a></p>
+      </article>
+      
+      <article class="simple-card">
+        <h3><a href="content/xechoro-systima-apomonomenis-topikis-leitourgias.html" target="_blank" rel="noopener noreferrer">Ξέχωρο Σύστημα Απομονωμένης Τοπικής Λειτουργίας</a></h3>
+        <p>Το LawersSystemControl μπορεί να λειτουργεί και ως ξέχωρο απομονωμένο τοπικό σύστημα, με πλήρη έλεγχο, αυξημένη ασφάλεια και λειτουργική αυτονομία.</p>
+        <p><a class="read-more-link" href="content/xechoro-systima-apomonomenis-topikis-leitourgias.html" target="_blank" rel="noopener noreferrer">Διαβάστε περισσότερα</a></p>
+      </article>
+      
+      <article class="simple-card">
+        <h3><a href="content/amesi-visual-epopteia-tou-fakelou.html" target="_blank" rel="noopener noreferrer">Άμεση Visual Εποπτεία του Φακέλου</a></h3>
+        <p>Το LawersSystemControl προσφέρει άμεση, ταχύτατη και visual εποπτεία κάθε σημείου του φακέλου, ώστε ο χρήστης να αποκτά πραγματικό έλεγχο της υπόθεσης χωρίς χρονοβόρα αναζήτηση.</p>
+        <p><a class="read-more-link" href="content/amesi-visual-epopteia-tou-fakelou.html" target="_blank" rel="noopener noreferrer">Διαβάστε περισσότερα</a></p>
+      </article>
+      
+      <article class="simple-card">
+        <h3><a href="content/perivallon-plirous-katagrafis-kai-ensomatosis.html" target="_blank" rel="noopener noreferrer">Περιβάλλον Πλήρους Καταγραφής και Ενσωμάτωσης</a></h3>
+        <p>Το LawersSystemControl λειτουργεί ως ενιαίο περιβάλλον πλήρους καταγραφής και ενσωμάτωσης, όπου τίποτε κρίσιμο δεν παραμένει διάσπαρτο ή αποκομμένο.</p>
+        <p><a class="read-more-link" href="content/perivallon-plirous-katagrafis-kai-ensomatosis.html" target="_blank" rel="noopener noreferrer">Διαβάστε περισσότερα</a></p>
+      </article>
+      
+      <article class="simple-card">
+        <h3><a href="content/automati-paragogi-dikografon.html" target="_blank" rel="noopener noreferrer">Αυτόματη Παραγωγή Δικογράφων</a></h3>
+        <p>Το LawersSystemControl υποστηρίζει δυνατότητα αυτόματης παραγωγής δικογράφων, μετατρέποντας την ήδη οργανωμένη πληροφορία της υπόθεσης σε άμεσα αξιοποιήσιμο νομικό κείμενο.</p>
+        <p><a class="read-more-link" href="content/automati-paragogi-dikografon.html" target="_blank" rel="noopener noreferrer">Διαβάστε περισσότερα</a></p>
+      </article>
+      
+      <article class="simple-card">
+        <h3><a href="content/neo-systima-skepsis-gia-tin-polyplokotita.html" target="_blank" rel="noopener noreferrer">Νέο Σύστημα Σκέψης για την Πολυπλοκότητα</a></h3>
+        <p>Το LawersSystemControl δεν ψηφιοποιεί απλώς την ακαταστασία, αλλά εισάγει νέο σύστημα σκέψης για την αντιμετώπιση της πολυπλοκότητας της νομικής εργασίας.</p>
+        <p><a class="read-more-link" href="content/neo-systima-skepsis-gia-tin-polyplokotita.html" target="_blank" rel="noopener noreferrer">Διαβάστε περισσότερα</a></p>
+      </article>
+      
+      <article class="simple-card">
+        <h3><a href="content/sosimo-xronou-kai-xrimatos.html" target="_blank" rel="noopener noreferrer">Σώσιμο Χρόνου και Χρήματος</a></h3>
+        <p>Το LawersSystemControl έχει σχεδιαστεί με κεντρικό σκοπό το σώσιμο χρόνου και χρήματος, μειώνοντας τον χαμένο χρόνο και το περιττό λειτουργικό βάρος του γραφείου.</p>
+        <p><a class="read-more-link" href="content/sosimo-xronou-kai-xrimatos.html" target="_blank" rel="noopener noreferrer">Διαβάστε περισσότερα</a></p>
+      </article>
+      
+      <article class="simple-card">
+        <h3><a href="content/xoris-antistoixo-stin-agora.html" target="_blank" rel="noopener noreferrer">Χωρίς Αντίστοιχο στην Αγορά</a></h3>
+        <p>Το LawersSystemControl δεν αποτελεί απλή παραλλαγή συνηθισμένου νομικού προγράμματος, αλλά ολοκληρωμένο σύστημα χωρίς ουσιαστικό αντίστοιχο στην αγορά.</p>
+        <p><a class="read-more-link" href="content/xoris-antistoixo-stin-agora.html" target="_blank" rel="noopener noreferrer">Διαβάστε περισσότερα</a></p>
+      </article>
+      
+      <article class="simple-card">
+        <h3><a href="content/paralleli-dynatotita-ypenthymiston-kai-logistikon.html" target="_blank" rel="noopener noreferrer">Παράλληλη Δυνατότητα Υπενθυμιστών και Λογιστικών</a></h3>
+        <p>Το LawersSystemControl υποστηρίζει παράλληλα υπενθυμιστές, λογιστικά και λειτουργικά εργαλεία, ώστε το γραφείο να εργάζεται σε ενιαίο πρακτικό περιβάλλον.</p>
+        <p><a class="read-more-link" href="content/paralleli-dynatotita-ypenthymiston-kai-logistikon.html" target="_blank" rel="noopener noreferrer">Διαβάστε περισσότερα</a></p>
+      </article>
+      
+      <article class="simple-card">
+        <h3><a href="content/optika-perivallonta-gia-ameso-elegxo.html" target="_blank" rel="noopener noreferrer">Οπτικά Περιβάλλοντα για Άμεσο Έλεγχο</a></h3>
+        <p>Το LawersSystemControl αξιοποιεί οπτικά περιβάλλοντα εργασίας ώστε η πληροφορία να παρουσιάζεται καθαρά, εποπτεύσιμα και άμεσα αξιοποιήσιμα.</p>
+        <p><a class="read-more-link" href="content/optika-perivallonta-gia-ameso-elegxo.html" target="_blank" rel="noopener noreferrer">Διαβάστε περισσότερα</a></p>
+      </article>
+      
+      <article class="simple-card">
+        <h3><a href="content/eniaio-systima-elegxou-olis-tis-ergasias.html" target="_blank" rel="noopener noreferrer">Ενιαίο Σύστημα Ελέγχου Όλης της Εργασίας</a></h3>
+        <p>Το LawersSystemControl συγκεντρώνει την οργάνωση, την καταγραφή, την εποπτεία και την παραγωγή εργασίας μέσα σε ένα ενιαίο ελεγχόμενο περιβάλλον.</p>
+        <p><a class="read-more-link" href="content/eniaio-systima-elegxou-olis-tis-ergasias.html" target="_blank" rel="noopener noreferrer">Διαβάστε περισσότερα</a></p>
+      </article>
+      
+      <article class="simple-card">
+        <h3><a href="content/domimeno-psifiako-pedio-ergasias.html" target="_blank" rel="noopener noreferrer">Δομημένο Ψηφιακό Πεδίο Εργασίας</a></h3>
+        <p>Η υπόθεση στο LawersSystemControl παύει να είναι απλή συσσώρευση αρχείων και μετατρέπεται σε δομημένο ψηφιακό πεδίο εργασίας.</p>
+        <p><a class="read-more-link" href="content/domimeno-psifiako-pedio-ergasias.html" target="_blank" rel="noopener noreferrer">Διαβάστε περισσότερα</a></p>
+      </article>
+      
+      <article class="simple-card">
+        <h3><a href="content/pliris-epopteia-kathe-simeiou-tis-ypothesis.html" target="_blank" rel="noopener noreferrer">Πλήρης Εποπτεία Κάθε Σημείου της Υπόθεσης</a></h3>
+        <p>Το LawersSystemControl επιτρέπει στο γραφείο να έχει πλήρη εποπτεία κάθε σημείου της υπόθεσης, χωρίς χαοτική αναζήτηση και χωρίς απώλεια συνοχής.</p>
+        <p><a class="read-more-link" href="content/pliris-epopteia-kathe-simeiou-tis-ypothesis.html" target="_blank" rel="noopener noreferrer">Διαβάστε περισσότερα</a></p>
+      </article>
+      
+      <article class="simple-card">
+        <h3><a href="content/amesi-prosvasi-stin-krisimi-pliroforia.html" target="_blank" rel="noopener noreferrer">Άμεση Πρόσβαση στην Κρίσιμη Πληροφορία</a></h3>
+        <p>Το LawersSystemControl έχει σχεδιαστεί ώστε η κρίσιμη πληροφορία να βρίσκεται άμεσα μπροστά στον χρήστη, χωρίς περιττές καθυστερήσεις και χαμένο χρόνο.</p>
+        <p><a class="read-more-link" href="content/amesi-prosvasi-stin-krisimi-pliroforia.html" target="_blank" rel="noopener noreferrer">Διαβάστε περισσότερα</a></p>
+      </article>
+      
+      <article class="simple-card">
+        <h3><a href="content/organomenos-psifiakos-xoros-gia-kathe-ypothesi.html" target="_blank" rel="noopener noreferrer">Οργανωμένος Ψηφιακός Χώρος για Κάθε Υπόθεση</a></h3>
+        <p>Κάθε υπόθεση στο LawersSystemControl αποκτά τον δικό της οργανωμένο ψηφιακό χώρο, όπου όλα τα στοιχεία της εργασίας συνδέονται και παραμένουν διαθέσιμα.</p>
+        <p><a class="read-more-link" href="content/organomenos-psifiakos-xoros-gia-kathe-ypothesi.html" target="_blank" rel="noopener noreferrer">Διαβάστε περισσότερα</a></p>
+      </article>
+      
+      <article class="simple-card">
+        <h3><a href="content/eniaia-diaxeirisi-saromenou-kai-psifiakou-ylikou.html" target="_blank" rel="noopener noreferrer">Ενιαία Διαχείριση Σαρωμένου και Ψηφιακού Υλικού</a></h3>
+        <p>Το LawersSystemControl ενώνει στο ίδιο περιβάλλον το σαρωμένο φυσικό υλικό και τα εξαρχής ψηφιακά αρχεία, ώστε ο φάκελος να παραμένει ενιαίος.</p>
+        <p><a class="read-more-link" href="content/eniaia-diaxeirisi-saromenou-kai-psifiakou-ylikou.html" target="_blank" rel="noopener noreferrer">Διαβάστε περισσότερα</a></p>
+      </article>
+      
+      <article class="simple-card">
+        <h3><a href="content/praktikos-elegxos-tis-kathimerinis-nomikis-ergasias.html" target="_blank" rel="noopener noreferrer">Πρακτικός Έλεγχος της Καθημερινής Νομικής Εργασίας</a></h3>
+        <p>Το LawersSystemControl δίνει στο γραφείο πρακτικό και άμεσο έλεγχο της καθημερινής νομικής εργασίας, χωρίς να τη βαραίνει με επιπλέον πολυπλοκότητα.</p>
+        <p><a class="read-more-link" href="content/praktikos-elegxos-tis-kathimerinis-nomikis-ergasias.html" target="_blank" rel="noopener noreferrer">Διαβάστε περισσότερα</a></p>
+      </article>
+      
+      <article class="simple-card">
+        <h3><a href="content/apo-tin-apothikefsi-stin-energi-paragogi-nomikou-ergou.html" target="_blank" rel="noopener noreferrer">Από την Αποθήκευση στην Ενεργή Παραγωγή Νομικού Έργου</a></h3>
+        <p>Το LawersSystemControl δεν περιορίζεται στην αποθήκευση, αλλά μετατρέπει το οργανωμένο υλικό της υπόθεσης σε ενεργό εργαλείο παραγωγής νομικού έργου.</p>
+        <p><a class="read-more-link" href="content/apo-tin-apothikefsi-stin-energi-paragogi-nomikou-ergou.html" target="_blank" rel="noopener noreferrer">Διαβάστε περισσότερα</a></p>
+      </article>
+      
+      <article class="simple-card">
+        <h3><a href="content/synecheia-kai-synoxi-tou-fakelou.html" target="_blank" rel="noopener noreferrer">Συνέχεια και Συνοχή του Φακέλου</a></h3>
+        <p>Το LawersSystemControl διατηρεί τη συνέχεια και τη συνοχή του φακέλου, ώστε η πληροφορία να μη διαλύεται σε αποσπασματικές κινήσεις και ξεχωριστά μέσα.</p>
+        <p><a class="read-more-link" href="content/synecheia-kai-synoxi-tou-fakelou.html" target="_blank" rel="noopener noreferrer">Διαβάστε περισσότερα</a></p>
+      </article>
+      
+      <article class="simple-card">
+        <h3><a href="content/elegxomeno-kai-axiopisto-perivallon-ergasias.html" target="_blank" rel="noopener noreferrer">Ελεγχόμενο και Αξιόπιστο Περιβάλλον Εργασίας</a></h3>
+        <p>Το LawersSystemControl προσφέρει στο γραφείο ελεγχόμενο και αξιόπιστο περιβάλλον εργασίας, σχεδιασμένο για σοβαρή επαγγελματική χρήση.</p>
+        <p><a class="read-more-link" href="content/elegxomeno-kai-axiopisto-perivallon-ergasias.html" target="_blank" rel="noopener noreferrer">Διαβάστε περισσότερα</a></p>
+      </article>
+      
+      <article class="simple-card">
+        <h3><a href="content/meiosi-tou-xaous-kai-tou-leitourgikou-thoryvou.html" target="_blank" rel="noopener noreferrer">Μείωση του Χάους και του Λειτουργικού Θορύβου</a></h3>
+        <p>Το LawersSystemControl περιορίζει το χάος και τον λειτουργικό θόρυβο που συσσωρεύονται στην καθημερινή διαχείριση της νομικής εργασίας.</p>
+        <p><a class="read-more-link" href="content/meiosi-tou-xaous-kai-tou-leitourgikou-thoryvou.html" target="_blank" rel="noopener noreferrer">Διαβάστε περισσότερα</a></p>
+      </article>
+      
+      <article class="simple-card">
+        <h3><a href="content/sovari-ypodomi-gia-sovari-nomiki-ergasia.html" target="_blank" rel="noopener noreferrer">Σοβαρή Υποδομή για Σοβαρή Νομική Εργασία</a></h3>
+        <p>Το LawersSystemControl έχει σχεδιαστεί ως σοβαρή υποδομή για απαιτητική νομική εργασία, με έμφαση στην οργάνωση, στον έλεγχο και στη λειτουργική συνέχεια.</p>
+        <p><a class="read-more-link" href="content/sovari-ypodomi-gia-sovari-nomiki-ergasia.html" target="_blank" rel="noopener noreferrer">Διαβάστε περισσότερα</a></p>
+      </article>
+      
+      <article class="simple-card">
+        <h3><a href="content/ensomatomenoi-roloi-gia-ai-elegxo-paragomenon-dikografon.html" target="_blank" rel="noopener noreferrer">Ενσωματωμένοι Ρόλοι Δικαστή, Εισαγγελέα, Δικηγόρου και Στενογράφου για Έλεγχο AI των Παραγομένων Δικογράφων</a></h3>
+        <p>Το LawersSystemControl μπορεί να αξιοποιεί ενσωματωμένους λειτουργικούς ρόλους, όπως δικαστή, εισαγγελέα, δικηγόρο και στενογράφο, για πολυεπίπεδο AI έλεγχο των παραγομένων δικογράφων πριν από την τελική ανθρώπινη αξιολόγηση.</p>
+        <p><a class="read-more-link" href="content/ensomatomenoi-roloi-gia-ai-elegxo-paragomenon-dikografon.html" target="_blank" rel="noopener noreferrer">Διαβάστε περισσότερα</a></p>
+      </article>
+      
+    </div>
+  </section>
+  
+
+  
+
+  
+
+  
+</section>
+
+    </div>
+  </main>
+
+  
+  <footer class="site-footer footer-style-solid footer-layout-stack"
+          style="
+            --footer-background-color: f8f8f8;
+            --footer-border-color: d6d6d6;
+            --footer-border-width: 1px;
+            --footer-radius: 10px;
+            --footer-padding: 24px;
+            --footer-text-align: center;
+          ">
+
+    
+
+    <div class="site-footer-content">
+
+      
+
+      
+
+      
+
+      
+
+      
+      <div class="site-footer-copyright">&copy; Lawers System Control</div>
+      
+
+      <div class="site-footer-default-text">Lawers System Control</div>
+
+    </div>
+  </footer>
+  
+
+</body>
+</html>
