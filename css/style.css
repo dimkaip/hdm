@@ -343,6 +343,18 @@ body.width-legal .block-content {
   white-space: pre-line;
 }
 
+.card-summary {
+  margin-bottom: 10px;
+}
+
+.card-summary > :first-child {
+  margin-top: 0;
+}
+
+.card-summary > :last-child {
+  margin-bottom: 0;
+}
+
 .person-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
